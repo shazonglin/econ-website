@@ -1,11 +1,11 @@
 import path from 'path';
+require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 
 async function serve() {
-  const url =
-    'mongodb+srv://shazonglin:admin@cluster0.cqx2srf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+  const url = process.env.MONGODB_URI;
   const client = new MongoClient(url);
 
   const app = express();
