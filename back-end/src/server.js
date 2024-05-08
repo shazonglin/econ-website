@@ -154,7 +154,7 @@ async function serve() {
   });
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/html.index'));
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
   });
 
   const port = process.env.PORT || 8000;
