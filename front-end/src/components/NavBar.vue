@@ -5,20 +5,32 @@
         <img :src="logo" alt="logo" />
       </router-link>
     </div>
-    <router-link to="/cart" class="cart-link">
-      <button>Shopping Cart</button>
-    </router-link>
+    <div class="nav-buttons-wrap">
+      <button class="sign-out-btn" @click="logOut" v-if="user">Sign Out</button>
+      <router-link to="/cart">
+        <button>Shopping Cart</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import { getAuth, signOut } from 'firebase/auth';
 import logo from '@/assets/logo-shoe.png';
 export default {
   name: 'NavBar',
+  props: ['user'],
   data() {
     return {
       logo,
     };
+  },
+  methods: {
+    logOut() {
+      const auth = getAuth();
+      signOut(auth);
+      alert('You have logged out!');
+    },
   },
 };
 </script>
@@ -39,6 +51,14 @@ export default {
   height: 120px;
 }
 .cart-link {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+.sign-out-btn {
+  margin-right: 20px;
+}
+.nav-buttons-wrap {
   position: absolute;
   right: 16px;
   top: 16px;

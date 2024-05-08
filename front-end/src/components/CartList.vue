@@ -1,21 +1,47 @@
 <template>
-  <div class="product-container" v-for="product in products" :key="product.id">
-    <img class="product-image" :src="product.imageName" alt="product image" />
-    <div class="details-wrap">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.price }}</p>
+  <div>
+    <div
+      class="product-container"
+      v-for="product in products"
+      :key="product.id"
+    >
+      <img class="product-image" :src="product.imageUrl" alt="product image" />
+      <div class="details-wrap">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.price }}</p>
+      </div>
+      <button class="remove-button" @click="removeItem(product.id)">
+        Remove from Cart
+      </button>
     </div>
-    <button class="remove-button">Remove from Cart</button>
+    <button class="checkout-button">Proceed to Checkout</button>
   </div>
-  <button class="checkout-button">Proceed to Checkout</button>
 </template>
 
 <script>
+// import axios from 'axios';
 export default {
   name: 'CartList',
   props: ['products'],
   data() {
-    return {};
+    return {
+      cartItems: [],
+    };
+  },
+  methods: {
+    /**
+     * Remove item from cart
+     */
+    removeItem(productId) {
+      // console.log(productId, this.cartItems, 'before');
+      // const response = await axios.delete(`/api/users/6666/cart/${productId}`);
+      // const cartItems = response.data;
+      // this.cartItems = cartItems;
+      // console.log(productId, this.cartItems, 'after');
+
+      // send it to parent component
+      this.$emit('updateCart', productId);
+    },
   },
 };
 </script>
